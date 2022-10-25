@@ -10,7 +10,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "example_matrix"
-  example_matrix:
+  read_env_file:
     runs-on: ubuntu-latest
     steps:
      # Checks-out my repository
@@ -23,3 +23,20 @@ jobs:
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "$APPNAME"
+  dynamics_job:
+    strategy:
+      matrix: 
+        repo: [eSandrone/todo_docker, eSandrone/actions, eSandrone/hello-world]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out my other private repo
+        uses: actions/checkout@master
+        with:
+          #repository: Service-and-Repairs/ckf-aws-cluster-state
+         # token:  token-needed
+          repository: ${{ matrix.repo }}
+          token: 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
+          
+      - name: Check out my other private repo
+        run: |
+          echo Ciao
