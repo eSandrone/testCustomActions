@@ -28,9 +28,10 @@ jobs:
       - run: |
           echo ${{ inputs.ID_RUN }}
           echo ${{ matrix.app }}
-          $URLS += ${{ matrix.app }} + ","
+          $URLS = $URLS + ${{ matrix.app }} + ","
           
   print-env-var:
+    needs: read_env_file
     runs-on: ubuntu-latest
     steps:
      # Checks-out my repository
