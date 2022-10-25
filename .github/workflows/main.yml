@@ -22,4 +22,4 @@ jobs:
           env-file-path: './.env'
       # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "${{ steps.file.outputs.data.last_app }}"
+        run: echo "${{ steps.file.outputs.appname }}"
