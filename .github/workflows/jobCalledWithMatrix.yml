@@ -25,4 +25,4 @@ jobs:
       
       - run: |
           echo ${{ inputs.ID_RUN }}
-          echo ${{ inputs.IMAGE }}
+          echo ${{ matrix.app }}
