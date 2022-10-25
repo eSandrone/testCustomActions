@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.read_env_file.outputs.matrix) }}
     steps:
-    - run: echo Run ${{ matrix.run }}
+    - run: echo Run ${{ matrix.app }}
     - run: date
     - run: sleep 1
     - run: date
