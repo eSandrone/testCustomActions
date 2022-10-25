@@ -31,15 +31,6 @@ jobs:
           #echo "::set-output name=matrix::$matrixStringifiedObject"
           echo "matrix=$matrixStringifiedObject" >> $GITHUB_OUTPUT
           
-      # Checks-out ckf-aws-cluster-state
-      - name: Check out my other private repo
-        uses: actions/checkout@master
-        with:
-          #repository: Service-and-Repairs/ckf-aws-cluster-state
-         # token:  token-needed
-          repository: eSandrone/todo_docker 
-          token: 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
-          
   #dynamics_job:
     #needs: read_env_file
     #runs-on: ubuntu-latest
