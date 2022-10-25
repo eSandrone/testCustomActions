@@ -28,7 +28,8 @@ jobs:
       - run: |
           echo ${{ inputs.ID_RUN }}
           echo ${{ matrix.app }}
-          URLS="$URLS${{ matrix.app }},"
+          URLS="${URLS}${{ matrix.app }},"
+          echo $URLS
           
   print-env-var:
     needs: read_env_file
