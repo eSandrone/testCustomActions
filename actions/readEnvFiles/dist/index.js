@@ -9826,7 +9826,7 @@ try {
     }
     core.setOutput("data", data);
     const variables = dotenv.parse(data);
-    Object.entries(variables).forEach(f => console.log(f));
+    Object.entries(variables).forEach(f => console.log(f[0] + " : nome variabile " + f[1] + " : valore variabile "));
     const payload = JSON.stringify(github.context.payload, undefined, 2)
   })
 } catch (error) {
