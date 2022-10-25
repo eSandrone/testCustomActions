@@ -35,7 +35,7 @@ jobs:
           #repository: Service-and-Repairs/ckf-aws-cluster-state
          # token:  token-needed
           repository: ${{ matrix.repo }}
-          token: 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
+          token: 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
           
       - name: Check out my other private repo
         run: |
