@@ -28,8 +28,8 @@ jobs:
       - run: |
           echo ${{ inputs.ID_RUN }}
           echo ${{ matrix.app }}
-          echo ${ env.URLS }}
-          env.URLS="${env.URLS}${{ matrix.app }},"
+          echo ${{ env.URLS }}
+          env.URLS="${{env.URLS}}${{ matrix.app }},"
           echo $URLS
           
   print-env-var:
