@@ -12,6 +12,8 @@ jobs:
   # This workflow contains a single job called "example_matrix"
   read_env_file:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-env.outputs.matrix }}
     steps:
      # Checks-out my repository
       - uses: actions/checkout@v3
@@ -22,21 +24,29 @@ jobs:
           env-file-path: './.env'
       # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "$APPNAME"
-  dynamics_job:
-    strategy:
-      matrix: 
-        repo: [eSandrone/todo_docker, eSandrone/actions, eSandrone/hello-world]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out my other private repo
-        uses: actions/checkout@master
-        with:
-          #repository: Service-and-Repairs/ckf-aws-cluster-state
-         # token:  token-needed
-          repository: ${{ matrix.repo }}
-          token: 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
-          
-      - name: Check out my other private repo
+        id: set-env
         run: |
-          echo Ciao
+          echo "$APPNAME"
+          matrixStringifiedObject="{\"include\":[{\"app\":\"kobra\"},{\"app\":\"zulu\"}]}"
+          echo "::set-output name=matrix::$matrixStringifiedObject"
+          
+  dynamics_job:
+    needs: read_env_file
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.job1.outputs.matrix) }}
+    steps:
+    - run: echo Run ${{ matrix.run }}
+    - run: date
+    - run: sleep 1
+    - run: date
+        
+  #test-trigger:
+    #needs: read_env_file
+    #if: needs.read_env_file.outputs.update.lenght > 0
+    #uses: eSandrone/actions/.github/workflows/jobCalledWithMatrix.yml@main
+    #strategy:
+      #matrix: ${{ fromJson(needs.job1.outputs.matrix) }}
+    #with:
+      #ID_RUN: ${{ github.run_id }}
+      #IMAGE: ${{ needs.read_env_file.outputs.update }}
