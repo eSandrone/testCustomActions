@@ -31,16 +31,25 @@ jobs:
           #echo "::set-output name=matrix::$matrixStringifiedObject"
           echo "matrix=$matrixStringifiedObject" >> $GITHUB_OUTPUT
           
-  dynamics_job:
-    needs: read_env_file
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJson(needs.read_env_file.outputs.matrix) }}
-    steps:
-    - run: echo Run ${{ matrix.app }}
-    - run: date
-    - run: sleep 1
-    - run: date
+      # Checks-out ckf-aws-cluster-state
+      - name: Check out my other private repo
+        uses: actions/checkout@master
+        with:
+          #repository: Service-and-Repairs/ckf-aws-cluster-state
+         # token:  token-needed
+          repository: eSandrone/todo_docker 
+          token: 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
+          
+  #dynamics_job:
+    #needs: read_env_file
+    #runs-on: ubuntu-latest
+    #strategy:
+      #matrix: ${{ fromJson(needs.read_env_file.outputs.matrix) }}
+    #steps:
+    #- run: echo Run ${{ matrix.app }}
+    #- run: date
+    #- run: sleep 1
+    #- run: date
         
   test-trigger:
     needs: read_env_file
