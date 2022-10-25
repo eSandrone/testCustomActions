@@ -9826,15 +9826,11 @@ try {
     }
     core.setOutput("data", data);
     const variables = dotenv.parse(data);
-    Object.entries(variables).forEach(f => console.log(f[0] + " : nome variabile " + f[1] + " : valore variabile "));
+    Object.entries(variables).forEach(f => core.exportVariable(f[0], f[1]));
     const payload = JSON.stringify(github.context.payload, undefined, 2)
   })
 } catch (error) {
   core.setFailed(error.message);
-}
-
-function setEnvVar(key, value) {
-  core.exportVariable(key, value);
 }
 })();
 
