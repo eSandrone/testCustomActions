@@ -1,0 +1,26 @@
+{
+  "name": "testcustomactions",
+  "version": "1.0.0",
+  "description": "Testing custom actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eSandrone/testCustomActions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eSandrone/testCustomActions/issues"
+  },
+  "homepage": "https://github.com/eSandrone/testCustomActions#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security"
+  }
+}

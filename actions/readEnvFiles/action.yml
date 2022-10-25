@@ -1,0 +1,10 @@
+name: 'Read .env file'
+description: 'This action will read the .env file and add variables to GITHUB_ENV'
+inputs:
+  env-file-path:  # id of input
+    description: 'The path of the file .env'
+    required: true
+    default: './.env'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
