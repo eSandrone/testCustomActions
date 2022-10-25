@@ -34,9 +34,10 @@ jobs:
     needs: read_env_file
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.job1.outputs.matrix) }}
+      matrix:
+        test: ${{ fromJson(needs.job1.outputs.matrix) }}
     steps:
-    - run: echo Run ${{ matrix.run }}
+    - run: echo Run ${{ test.run }}
     - run: date
     - run: sleep 1
     - run: date
