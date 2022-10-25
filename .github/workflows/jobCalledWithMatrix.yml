@@ -17,8 +17,8 @@ jobs:
   # This workflow contains a single job called "example_matrix"
   read_env_file:
     runs-on: ubuntu-latest
-    outputs:
-      update: ${{ steps.set-env.outputs.app_updated }}
+    strategy:
+      matrix: ${{ fromJson(inputs.IMAGE) }}
     steps:
      # Checks-out my repository
       - uses: actions/checkout@v3
