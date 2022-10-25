@@ -12,7 +12,7 @@ on:
       IMAGE:
         type: string
 env:
-  URLS: ""
+  URLS: "AAA"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,7 +28,8 @@ jobs:
       - run: |
           echo ${{ inputs.ID_RUN }}
           echo ${{ matrix.app }}
-          URLS="${URLS}${{ matrix.app }},"
+          echo ${ env.URLS }}
+          env.URLS="${env.URLS}${{ matrix.app }},"
           echo $URLS
           
   print-env-var:
