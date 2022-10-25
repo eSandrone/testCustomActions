@@ -13,8 +13,7 @@ jobs:
   read_env_file:
     runs-on: ubuntu-latest
     outputs:
-      image: ${{ steps.set-env.outputs.matrix }}
-      urls: ${{ steps.set-env.outputs.matrix }}
+      matrix: ${{ steps.set-env.outputs.matrix }}
     steps:
      # Checks-out my repository
       - uses: actions/checkout@v3
@@ -28,16 +27,14 @@ jobs:
         id: set-env
         run: |
           echo "$APPNAME"
-          matrixStringifiedObject="{\"include\":[{\"app\":\"kobra\"},{\"app\":\"zulu\"}]}"
-          echo "::set-output name=image::$matrixStringifiedObject"
           matrixStringifiedObject="{\"include\":[{\"app\":\"$APPNAME\"},{\"app\":\"$APPNAME2\"}]}"
-          echo "::set-output name=urls::$matrixStringifiedObject"
+          echo "::set-output name=matrix::$matrixStringifiedObject"
           
   dynamics_job:
     needs: read_env_file
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.read_env_file.outputs.image) }}
+      matrix: ${{ fromJson(needs.read_env_file.outputs.matrix) }}
     steps:
     - run: echo Run ${{ matrix.app }}
     - run: date
@@ -46,8 +43,8 @@ jobs:
         
   test-trigger:
     needs: read_env_file
-    if: needs.read_env_file.outputs.update.lenght > 0
+    if: needs.read_env_file.outputs.matrix.lenght > 0
     uses: eSandrone/testCustomActions/.github/workflows/jobCalledWithMatrix.yml@main
     with:
       ID_RUN: ${{ github.run_id }}
-      IMAGE: ${{ needs.read_env_file.outputs.image }}
+      IMAGE: ${{ needs.read_env_file.outputs.matrix }}
