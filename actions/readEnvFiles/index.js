@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 
 try {
   // `who-to-greet` input defined in action metadata file
-  const pathEnvFile = core.getInput('env-file-path') || '.';
+  const pathEnvFile = core.getInput('env-file-path');
   fs.readFile(pathEnvFile, 'utf8', (err, data) => {
     if (err) {
         console.error(err);
