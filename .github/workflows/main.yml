@@ -38,7 +38,7 @@ jobs:
           #repository: Service-and-Repairs/ckf-aws-cluster-state
          # token:  token-needed
           repository: eSandrone/todo_docker 
-          token: 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
+          token: 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
           
   #dynamics_job:
     #needs: read_env_file
