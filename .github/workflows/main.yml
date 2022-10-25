@@ -28,7 +28,8 @@ jobs:
         run: |
           echo "$APPNAME"
           matrixStringifiedObject="{\"include\":[{\"app\":\"$APPNAME\"},{\"app\":\"$APPNAME2\"}]}"
-          echo "::set-output name=matrix::$matrixStringifiedObject"
+          #echo "::set-output name=matrix::$matrixStringifiedObject"
+          echo ":matrix=$matrixStringifiedObject" >> $GITHUB_OUTPUT
           
   dynamics_job:
     needs: read_env_file
