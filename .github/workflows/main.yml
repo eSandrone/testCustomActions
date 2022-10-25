@@ -43,7 +43,6 @@ jobs:
         
   test-trigger:
     needs: read_env_file
-    if: needs.read_env_file.outputs.matrix.lenght > 0
     uses: eSandrone/testCustomActions/.github/workflows/jobCalledWithMatrix.yml@main
     with:
       ID_RUN: ${{ github.run_id }}
