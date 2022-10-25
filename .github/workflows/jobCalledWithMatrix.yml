@@ -11,6 +11,8 @@ on:
         type: string
       IMAGE:
         type: string
+env:
+  URLS: ""
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -26,3 +28,14 @@ jobs:
       - run: |
           echo ${{ inputs.ID_RUN }}
           echo ${{ matrix.app }}
+          $URLS += ${{ matrix.app }} + ","
+          
+  print-env-var:
+    runs-on: ubuntu-latest
+    steps:
+     # Checks-out my repository
+      - uses: actions/checkout@v3
+      
+      - run: |
+          echo $URLS
+          
