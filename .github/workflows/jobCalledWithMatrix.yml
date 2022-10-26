@@ -13,7 +13,7 @@ on:
         type: string
     outputs:
       URLS2: 
-        value: ${{ jobs.read_env_file.outputs.urls }}
+        value: ${{ jobs.read_env_file.outputs.url-list }}
 env:
   URLS: "AAA,"
 
