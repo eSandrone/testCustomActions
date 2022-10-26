@@ -12,7 +12,8 @@ on:
       IMAGE:
         type: string
     outputs:
-      URLS2: 
+      urls2:
+        description: "test url"
         value: ${{ jobs.read_env_file.outputs.url-list }}
 env:
   URLS: "AAA,"
@@ -35,7 +36,8 @@ jobs:
         run: |
           URLS2="${{ matrix.app }},"
           echo $URLS2
-          echo "url=$URLS2" >> $GITHUB_OUTPUT
+          #echo "url=$URLS2" >> $GITHUB_OUTPUT
+          echo "::set-output name=url::$URLS2"
           
   print-env-var:
     needs: read_env_file
