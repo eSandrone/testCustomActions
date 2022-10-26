@@ -11,6 +11,9 @@ on:
         type: string
       IMAGE:
         type: string
+    outputs:
+      URLS2: 
+        value: ${{ jobs.read_env_file.outputs.urls }}
 env:
   URLS: "AAA,"
 
@@ -19,6 +22,8 @@ jobs:
   # This workflow contains a single job called "example_matrix"
   read_env_file:
     runs-on: ubuntu-latest
+    outputs:
+      URLS2: ${{ jobs.read_env_file.outputs.urls }}
     strategy:
       matrix: ${{ fromJson(inputs.IMAGE) }}
     steps:
