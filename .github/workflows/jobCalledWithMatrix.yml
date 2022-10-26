@@ -23,19 +23,22 @@ jobs:
   read_env_file:
     runs-on: ubuntu-latest
     outputs:
-      URLS2: ${{ jobs.read_env_file.outputs.urls }}
+      url-list: ${{ steps.url-getter.outputs.urls }}
     strategy:
       matrix: ${{ fromJson(inputs.IMAGE) }}
     steps:
      # Checks-out my repository
       - uses: actions/checkout@v3
       
-      - run: |
+      - name: usrl
+        id: url-getter
+        run: |
           echo ${{ inputs.ID_RUN }}
           echo ${{ matrix.app }}
           echo ${{ env.URLS }}
-          URLS="${{ env.URLS }}${{ matrix.app }},"
+          URLS="$${{ matrix.app }},"
           echo ${{env.URLS}}
+          echo "urls=$URLS" >> $GITHUB_OUTPUT
           
   print-env-var:
     needs: read_env_file
