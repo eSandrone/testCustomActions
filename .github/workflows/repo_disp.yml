@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: DynamicsJobs
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  repository_dispatch:
+    
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "example_matrix"
+  get-data:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: 'echo "field: ${{ github.event.client_payload.url }}"'
+      - run: 'echo "field: ${{ github.event.client_payload.run_id }}"'
+      - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
+      - run: echo baz
+        if: github.event.action == 'baz'
