@@ -36,9 +36,8 @@ jobs:
           echo ${{ inputs.ID_RUN }}
           echo ${{ matrix.app }}
           echo ${{ env.URLS }}
-          URLS="$${{ matrix.app }},"
-          echo ${{env.URLS}}
-          echo "urls=$URLS" >> $GITHUB_OUTPUT
+          URLS2="${{ matrix.app }},"
+          echo "urls=$URLS2" >> $GITHUB_OUTPUT
           
   print-env-var:
     needs: read_env_file
