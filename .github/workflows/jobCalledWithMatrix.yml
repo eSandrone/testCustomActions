@@ -25,8 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       url-list: ${{ steps.url-getter.outputs.url }}
-    #strategy:
-      #matrix: ${{ fromJson(inputs.IMAGE) }}
+    strategy:
+      matrix: ${{ fromJson(inputs.IMAGE) }}
     steps:
      # Checks-out my repository
       - uses: actions/checkout@v3
