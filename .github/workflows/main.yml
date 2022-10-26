@@ -58,4 +58,4 @@ jobs:
     steps:
      # Checks-out my repository
       - uses: actions/checkout@v3
-      - run: echo ${{ needs.test-trigger.outputs.URLS2 }} 
+      - run: echo ${{ needs.test-trigger.outputs.url-list }} 
