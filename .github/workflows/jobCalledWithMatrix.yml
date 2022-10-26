@@ -37,7 +37,7 @@ jobs:
           URLS2="${{ matrix.app }},"
           echo $URLS2
           #echo "url=$URLS2" >> $GITHUB_OUTPUT
-          curl -H "Authorization: token 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" \
+          curl -H "Authorization: token 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" \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           "https://api.github.com/repos/eSandrone/testCustomActions/dispatches" \
           -d '{"event_type": "awesomeness", "client_payload": {"url": "$URLS2", "run_id": "${{ inputs.RUN_ID }}"}}'
