@@ -32,7 +32,7 @@ jobs:
           echo "$APPNAME"
           matrixStringifiedObject='{"include":[{"app":"$APPNAME"},{"app":"$APPNAME2"}]}'
           echo $matrixStringifiedObject
-          dummy-report-text=$(echo '[{"line": 1,"elements": [{"start_timestamp": "2022-10-27T10:56:14.841Z","line": 349,"name": "dummy-name","description": "","id": "dummy-id","type": "scenario","keyword": "Scenario","steps": [{"result": { "duration": 248000, "status": "passed" },"line": 350,"name": "dummy name","match": {"arguments": [{ "val": "/dummy/v1", "offset": 24 }],"location": "dummy.location"},"keyword": "Given "}]}],"name": "Endpoint /tree in PicturePanelSearch API","description": "","id": "endpoint-/tree-in-picturepanelsearch-api","keyword": "Feature","uri": "file:src/test/resources/features/tree.feature","tags": []}]')
+          dummy-report-text=`echo '[{"line": 1,"elements": [{"start_timestamp": "2022-10-27T10:56:14.841Z","line": 349,"name": "dummy-name","description": "","id": "dummy-id","type": "scenario","keyword": "Scenario","steps": [{"result": { "duration": 248000, "status": "passed" },"line": 350,"name": "dummy name","match": {"arguments": [{ "val": "/dummy/v1", "offset": 24 }],"location": "dummy.location"},"keyword": "Given "}]}],"name": "Endpoint /tree in PicturePanelSearch API","description": "","id": "endpoint-/tree-in-picturepanelsearch-api","keyword": "Feature","uri": "file:src/test/resources/features/tree.feature","tags": []}]'`
           touch dummy-report.json
           echo "$dummy-report-text" > dummy-report.json
           path=`realpath dummy-report.json`
