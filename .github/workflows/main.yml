@@ -29,6 +29,15 @@ jobs:
       - name: choice
         run: |
           echo ${{ inputs.name }}
+      - name: choice 1
+        if: contains(inputs.name, '1')
+        run: |
+          echo "${{ inputs.name }} is selected"
+      - name: choice 2
+        if: contains(inputs.name, '2')
+        run: |
+          echo "${{ inputs.name }} is selected"
+      
       - name: read env file step
         id: file
         uses: ./actions/setEnvVariable
