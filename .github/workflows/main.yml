@@ -6,6 +6,12 @@ name: DynamicsJobs
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    name:
+      type: choice
+      description: HELLO THERE
+      options:
+      - name-1
+      - name-2
   repository_dispatch:
     types: [pip-selftest]
 
@@ -19,6 +25,9 @@ jobs:
     steps:
      # Checks-out my repository
       - uses: actions/checkout@v3
+      - name: choice
+        run: |
+          echo ${{ github.event.inputs.choice }}
       - name: read env file step
         id: file
         uses: ./actions/setEnvVariable
