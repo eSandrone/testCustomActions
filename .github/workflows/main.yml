@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: choice
         run: |
-          echo ${{ github.event.inputs.choice }}
+          echo ${{ inputs.name }}
       - name: read env file step
         id: file
         uses: ./actions/setEnvVariable
