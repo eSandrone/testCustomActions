@@ -64,6 +64,7 @@ jobs:
           echo test started!
           echo ${{ github.event.client_payload.test-command }}
           echo ${{ github.event.client_payload.component }}
+          echo ${{ github.event.client_payload.image }}
           
       #Checkout repository (BitBucket) and execute tests
       - name: Checkout repository BitBucket and execute tests
@@ -78,6 +79,7 @@ jobs:
           echo test started!
           echo ${{ github.event.client_payload.test-command }}
           echo ${{ github.event.client_payload.component }}
+          echo ${{ github.event.client_payload.image }}
           
       - name: SBOM creation
         if: always()
