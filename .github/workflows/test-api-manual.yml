@@ -10,7 +10,7 @@ on:
 jobs: 
     
   testing-images:
-    name: env-variables
+    name: Executing tests
     if: ${{ github.event.action == 'test-app' }}
     runs-on: [ ubuntu-latest ]
     steps:
@@ -41,7 +41,7 @@ jobs:
            #selfStatus="passed"
            echo "::set-output name=selfStatus::$selfStatus";
            echo "::set-output name=issueKey::$issueKey";
-           deactivate
+           #deactivate
            
       - name: Get date
         id: starting
