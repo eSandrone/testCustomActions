@@ -23,7 +23,7 @@ jobs:
            function cd_back() { 
              cd $(printf "%0.s../" $(seq 1 $1))
             }
-           cd_back 4
+           #cd_back 4
            #cd self_test
            #source venv_/bin/activate
            #cd pip-self-test-main/features
@@ -87,7 +87,7 @@ jobs:
           function cd_back() { 
            cd $(printf "%0.s../" $(seq 1 $1))
           }
-          cd_back 4
+          #cd_back 4
           testDir=""
           if [[ ${{ steps.repo-git.outcome }} == 'success' ]]
           then
