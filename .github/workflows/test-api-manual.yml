@@ -1,0 +1,102 @@
+#Workflow name
+name: Execute tests
+on:
+        
+  #Repository dispatch
+  repository_dispatch:
+    types: [ test-app ]
+      
+
+jobs: 
+    
+  testing-images:
+    name: env-variables
+    if: ${{ github.event.action == 'test-app' }}
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Execute self test
+      - name: execute self test
+        id: selfTest
+        run: |
+           function cd_back() { 
+             cd $(printf "%0.s../" $(seq 1 $1))
+            }
+           cd_back 4
+           #cd self_test
+           #source venv_/bin/activate
+           #cd pip-self-test-main/features
+           #run_duration=`behave -f json.pretty -o my_reports.json --no-capture`
+           #run_duration=${run_duration##*Took}
+           #minutes=${run_duration:0:2}
+           #prefix=${run_duration%%s*}
+           #index=${#prefix}
+           #seconds=${run_duration:3:$index}
+           #seconds=${seconds%%s*}
+           #run_duration_s=`printf '%.3f\n' "$(echo "$minutes * 60 + $seconds" | bc)"`
+           #issueKey=`python test_exec.py ${{ github.run_id }}`
+           #selfStatus=`python self_report.py ${{ github.run_id }} $run_duration_s $issueKey`
+           #issueKey="556418"
+           #selfStatus="passed"
+           echo "::set-output name=selfStatus::$selfStatus";
+           echo "::set-output name=issueKey::$issueKey";
+           deactivate
+           
+      - name: Get date
+        id: starting
+        run: echo "::set-output name=started::$(date -d "2 hour" +"%s")"
+          
+      #Checkout repository (GitHub)
+      - name: Checkout repository GitHub
+        id: repo-git
+        if: contains(github.event.client_payload.test-repo, 'github.com')
+        run: |
+          echo ${{ github.event.client_payload.test-repo }}
+      
+      #Execute test (GitHub)
+      - name: Execute tests (GitHub)
+        id: github-run
+        if: steps.repo-git.outcome == 'success'
+        run: |
+          currentDir=$(pwd)
+          echo "::set-output name=currentDir::$currentDir"
+          echo test started!
+          echo ${{ github.event.client_payload.test-command }}
+          echo ${{ github.event.client_payload.component }}
+          
+      #Checkout repository (BitBucket) and execute tests
+      - name: Checkout repository BitBucket and execute tests
+        id: bitTest
+        if: contains(github.event.client_payload.test-repo, 'bitbucket')
+        run: |
+          mkdir bitbucketRepo
+          cd bitbucketRepo
+          echo ${{ github.event.client_payload.test-repo }}
+          currentDir=$(pwd)
+          echo "::set-output name=currentDir::$currentDir"
+          echo test started!
+          echo ${{ github.event.client_payload.test-command }}
+          echo ${{ github.event.client_payload.component }}
+          
+      - name: SBOM creation
+        if: always()
+        run: |
+          function cd_back() { 
+           cd $(printf "%0.s../" $(seq 1 $1))
+          }
+          cd_back 4
+          testDir=""
+          if [[ ${{ steps.repo-git.outcome }} == 'success' ]]
+          then
+            testDir="${{ steps.github-run.outputs.currentDir }}"
+          else
+            testDir="${{ steps.bitTest.outputs.currentDir }}"
+          fi
+          echo $testDir
+          echo ${{ steps.selfTest.outputs.issueKey}}
+          echo ${{ steps.selfTest.outputs.selfStatus}}
+          #cd dependency-check/bin
+          #./dependency-check.sh --scan $testDir -f JSON --disableRetireJS --disableOssIndex --disableCentral --disableNodeAudit --out ./$imageVersion.json
+    
+          
